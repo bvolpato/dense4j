@@ -39,7 +39,7 @@ public class DenseCalculatorTest {
         assertEquals(2, density.get("dense4j").intValue());
         assertEquals(1, density.get("api").intValue());
         assertEquals(1, density.get("developed").intValue());
-        assertEquals(2, density.get("bruno").intValue());
+        assertEquals(2, density.get("Bruno").intValue());
         assertEquals(1, density.get("candido").intValue());
         assertEquals(1, density.get("volpato").intValue());
         assertEquals(1, density.get("cunha").intValue());

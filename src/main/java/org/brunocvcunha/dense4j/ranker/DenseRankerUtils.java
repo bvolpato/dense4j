@@ -39,7 +39,17 @@ public class DenseRankerUtils {
         newMap.putAll(inputMap);
 
         
-        Map<String, Integer> linkedMap = new LinkedHashMap<String, Integer>(newMap);
+        LinkedHashMap<String, Integer> linkedMap = new LinkedHashMap<String, Integer>(newMap) {
+            /**
+             * 
+             */
+            private static final long serialVersionUID = -3636811866458661418L;
+
+            @Override
+            public Integer get(Object key) {
+                return super.get(key.toString().toLowerCase());
+            }
+        };
         return linkedMap;
     }
 
