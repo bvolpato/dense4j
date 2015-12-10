@@ -31,7 +31,7 @@ public class DenseRankerUtils {
     /**
      * Rank Map based on the value
      * 
-     * @param inputMap
+     * @param inputMap the map to rank
      * @return new ranked map
      */
     public static Map<String, Integer> rank(Map<String, Integer> inputMap) {
