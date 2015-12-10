@@ -15,12 +15,11 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.brunocvcunha.dense4j</groupId>
 	<artifactId>dense4j</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 	<name>dense4j</name>
 	<description>Keyword Density API for Java</description>
@@ -49,11 +48,49 @@
 		<url>git@github.com:brunocvcunha/dense4j.git</url>
 	</scm>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<name>Sonatype OSS</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 
 	<build>
 
 		<plugins>
+
+
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.3</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<useReleaseProfile>false</useReleaseProfile>
+						<arguments>-Psonatype-oss-release</arguments>
+					</configuration>
+				</plugin>
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -136,7 +173,7 @@
 		<dependency>
 			<groupId>org.brunocvcunha.inutils4j</groupId>
 			<artifactId>inutils4j</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 
 
@@ -145,5 +182,56 @@
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 	</properties>
+
+
+		<profiles>
+			<profile>
+				<id>sonatype-oss-release</id>
+				<build>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-source-plugin</artifactId>
+							<version>2.1.2</version>
+							<executions>
+								<execution>
+									<id>attach-sources</id>
+									<goals>
+										<goal>jar-no-fork</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.7</version>
+							<executions>
+								<execution>
+									<id>attach-javadocs</id>
+									<goals>
+										<goal>jar</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-gpg-plugin</artifactId>
+							<version>1.1</version>
+							<executions>
+								<execution>
+									<id>sign-artifacts</id>
+									<phase>verify</phase>
+									<goals>
+										<goal>sign</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
+		</profiles>
 
 </project>
