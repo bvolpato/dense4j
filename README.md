@@ -28,5 +28,31 @@ Snapshots of the development version are available in [Sonatype's `snapshots` re
 Dense4j requires at minimum Java 6.
 
 
+
+
+Usage Example
+--------
+
+Java App:
+```java
+import org.brunocvcunha.dense4j.DenseCalculator;
+
+public class Dense4jMain {
+    public static void main(String[] args) throws IOException {
+      String text = "Dense4j is an API developed by Bruno Candido Volpato da Cunha. " +
+              "Bruno decided to start Dense4j in 2015.";
+
+      Map<String, Integer> density = DenseCalculator.getKeywordsMap(text);
+
+      System.out.println("Density Map: " + density.toString());
+      
+      System.out.println("Density for Bruno is: " + density.get("bruno"));
+    }
+}
+```
+
+
+
+
  [1]: https://search.maven.org/remote_content?g=org.brunocvcunha.dense4j&a=dense4j&v=LATEST
  [snap]: https://oss.sonatype.org/content/repositories/snapshots/
