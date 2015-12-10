@@ -27,10 +27,10 @@ public class DenseCalculatorTest {
     @Test
     public void simpleDensity() {
         String text = "Dense4j is an API developed by Bruno Candido Volpato da Cunha. " +
-                "Bruno decided to start Dense4j in 2015.";
+                "Bruno de to st Dense4j in 2015.";
                 
         Map<String, Integer> density = DenseCalculator.getKeywordsMap(text);
-        assertEquals(10, density.size());
+        assertEquals(8, density.size());
         
         System.out.println(density);
         
@@ -44,5 +44,16 @@ public class DenseCalculatorTest {
         assertEquals(1, density.get("volpato").intValue());
         assertEquals(1, density.get("cunha").intValue());
         assertEquals(1, density.get("2015").intValue());
+        
+        Map<String, Integer> percentDensity = DenseCalculator.changeValueToPercent(density);
+        assertEquals(20, percentDensity.get("dense4j").intValue());
+        assertEquals(10, percentDensity.get("api").intValue());
+        assertEquals(10, percentDensity.get("developed").intValue());
+        assertEquals(20, percentDensity.get("Bruno").intValue());
+        assertEquals(10, percentDensity.get("candido").intValue());
+        assertEquals(10, percentDensity.get("volpato").intValue());
+        assertEquals(10, percentDensity.get("cunha").intValue());
+        assertEquals(10, percentDensity.get("2015").intValue());
+
     }
 }

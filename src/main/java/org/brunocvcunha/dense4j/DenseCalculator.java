@@ -16,8 +16,11 @@
 package org.brunocvcunha.dense4j;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.brunocvcunha.dense4j.ranker.CaseInsensitiveLinkedHashMap;
 import org.brunocvcunha.dense4j.ranker.DenseRankerUtils;
 
 /**
@@ -53,5 +56,28 @@ public class DenseCalculator {
         }
 
         return DenseRankerUtils.rank(uniques);
+    }
+    
+    
+    /**
+     * Change actual number of repetitions score to percent
+     * @param rank The ranked map
+     * @return new map based on the percentage
+     */
+    public static Map<String, Integer> changeValueToPercent(Map<String, Integer> rank) {
+        int total = 0;
+        
+        for (Integer rankValue : rank.values()) {
+            total += rankValue.intValue();
+        }
+        
+        Map<String, Integer> newMap = new CaseInsensitiveLinkedHashMap<Integer>();
+        
+        for (Entry<String, Integer> entry : rank.entrySet()) {
+            newMap.put(entry.getKey(), (entry.getValue() * 100) / total);
+        }
+        
+        return newMap;
+        
     }
 }
