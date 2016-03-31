@@ -2,7 +2,8 @@ dense4j
 ========
 
 [![Apache License](http://img.shields.io/badge/license-ASL-blue.svg)](https://github.com/brunocvcunha/dense4j/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/brunocvcunha/inutils4j.svg)](https://travis-ci.org/brunocvcunha/dense4j)
+[![Build Status](https://travis-ci.org/brunocvcunha/dense4j.svg)](https://travis-ci.org/brunocvcunha/dense4j)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.dense4j/dense4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.dense4j/dense4j)
 
 Keyword Density API for Java
 
@@ -45,7 +46,7 @@ public class Dense4jMain {
       Map<String, Integer> density = DenseCalculator.getKeywordsMap(text);
 
       System.out.println("Density Map: " + density.toString());
-      
+
       System.out.println("Density for Bruno is: " + density.get("bruno"));
     }
 }
