@@ -4,6 +4,7 @@ dense4j
 [![Apache License](http://img.shields.io/badge/license-ASL-blue.svg)](https://github.com/brunocvcunha/dense4j/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/brunocvcunha/dense4j.svg)](https://travis-ci.org/brunocvcunha/dense4j)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.dense4j/dense4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.dense4j/dense4j)
+[![Coverage Status](https://coveralls.io/repos/github/brunocvcunha/dense4j/badge.svg?branch=master)](https://coveralls.io/github/brunocvcunha/dense4j?branch=master)
 
 Keyword Density API for Java
 
@@ -16,12 +17,12 @@ Download [the latest JAR][1] or grab via Maven:
 <dependency>
   <groupId>org.brunocvcunha.dense4j</groupId>
   <artifactId>dense4j</artifactId>
-  <version>1.0</version>
+  <version>0.2</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'org.brunocvcunha.dense4j:dense4j:1.0'
+compile 'org.brunocvcunha.dense4j:dense4j:0.2'
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
