@@ -56,4 +56,37 @@ public class DenseCalculatorTest {
         assertEquals(10, percentDensity.get("2015").intValue());
 
     }
+    
+    @Test
+    public void unicodeDensity() {
+        String text = "Dense4j es una API desarrollada por Bruno Candido Volpato da Cunha. " +
+                "Y actualizada por Jorge Moreno Blázquez en el año 2017.";
+                
+        Map<String, Integer> density = DenseCalculator.getKeywordsMap(text);
+        assertEquals(15, density.size());
+        
+        System.out.println(density);
+        
+        assertFalse(density.containsKey("is"));
+        assertFalse(density.containsKey("an"));
+        assertEquals(1, density.get("dense4j").intValue());
+        assertEquals(1, density.get("api").intValue());
+        assertEquals(1, density.get("desarrollada").intValue());
+        assertEquals(1, density.get("Bruno").intValue());
+        assertEquals(1, density.get("candido").intValue());
+        assertEquals(1, density.get("volpato").intValue());
+        assertEquals(1, density.get("cunha").intValue());
+        assertEquals(1, density.get("2017").intValue());
+        
+        Map<String, Integer> percentDensity = DenseCalculator.changeValueToPercent(density);
+        assertEquals(6, percentDensity.get("dense4j").intValue());
+        assertEquals(6, percentDensity.get("api").intValue());
+        assertEquals(6, percentDensity.get("desarrollada").intValue());
+        assertEquals(6, percentDensity.get("Bruno").intValue());
+        assertEquals(6, percentDensity.get("candido").intValue());
+        assertEquals(6, percentDensity.get("volpato").intValue());
+        assertEquals(6, percentDensity.get("cunha").intValue());
+        assertEquals(6, percentDensity.get("2017").intValue());
+
+    }
 }
