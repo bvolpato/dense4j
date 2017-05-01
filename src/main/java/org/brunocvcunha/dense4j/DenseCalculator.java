@@ -53,7 +53,7 @@ public class DenseCalculator {
      */
     public static Map<String, Integer> getKeywordsMap(String text, int minLength) {
         String textLc = text.toLowerCase();
-        String[] words = textLc.split("\\s+|,\\s*|\\.\\s*");
+        String[] words = textLc.split("\\s+|,\\s*|\\.\\s*|\\?\\s*|¿\\s*|:\\s*|-\\s*|\\(\\s*|\\)\\s*");
         Map<String, Integer> uniques = new HashMap<String, Integer>();
         for (String word : words) {
             // ignore words 2 or less characters long
