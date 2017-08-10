@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.brunocvcunha.dense4j.ranker.CaseInsensitiveLinkedHashMap;
 import org.brunocvcunha.dense4j.ranker.DenseRankerUtils;
@@ -39,7 +41,7 @@ public class DenseCalculator {
      * @return map
      */
     public static Map<String, Integer> getKeywordsMap(String text) {
-        return getKeywordsMap(text, 2);
+        return getKeywordsMap(text, 3);
     }
     
     /**
@@ -52,22 +54,33 @@ public class DenseCalculator {
      * @return map
      */
     public static Map<String, Integer> getKeywordsMap(String text, int minLength) {
-        String textLc = text.toLowerCase();
-        String[] words = textLc.split("\\W");
+        return getKeywordsMap(text, Pattern.compile("\\b[a-zA-Z0-9]{" + minLength +",}\\b"));
+    }
+    
+    /**
+     * Get keywords map based on the repetitions
+     * 
+     * @param text
+     *            text to calculate density
+     * @param pattern
+     *            Pattern to select
+     * @return map
+     */
+    public static Map<String, Integer> getKeywordsMap(String text, Pattern pattern) {
+        
+        Matcher m = pattern.matcher(text);
         Map<String, Integer> uniques = new HashMap<String, Integer>();
-        for (String word : words) {
-            // ignore words 2 or less characters long
-            if (word.length() <= minLength) {
-                continue;
-            }
 
+        while (m.find()) {
+            String word = m.group();
+                
             if (uniques.containsKey(word)) {
                 uniques.put(word, uniques.get(word) + 1);
             } else {
                 uniques.put(word, 1);
             }
         }
-
+        
         return DenseRankerUtils.rank(uniques);
     }
     

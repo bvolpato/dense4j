@@ -19,10 +19,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
 public class DenseCalculatorTest {
+
 
     @Test
     public void simpleDensity() {
@@ -30,9 +32,8 @@ public class DenseCalculatorTest {
                 "Bruno de to st Dense4j in 2015.";
                 
         Map<String, Integer> density = DenseCalculator.getKeywordsMap(text);
-        assertEquals(8, density.size());
-        
         System.out.println(density);
+        assertEquals(8, density.size());
         
         assertFalse(density.containsKey("is"));
         assertFalse(density.containsKey("an"));
@@ -55,5 +56,12 @@ public class DenseCalculatorTest {
         assertEquals(10, percentDensity.get("cunha").intValue());
         assertEquals(10, percentDensity.get("2015").intValue());
 
+        
+        Map<String, Integer> pairs = DenseCalculator.getKeywordsMap(text, Pattern.compile("\\b[a-zA-Z0-9]+\\W[a-zA-Z0-9]+\\b"));
+        System.out.println(pairs);
+        assertEquals(8, density.size());
+        
     }
+    
+    
 }
