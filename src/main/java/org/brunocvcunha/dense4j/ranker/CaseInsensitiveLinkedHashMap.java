@@ -17,6 +17,7 @@ package org.brunocvcunha.dense4j.ranker;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Case insensitive LinkedHashMap
@@ -46,12 +47,39 @@ public class CaseInsensitiveLinkedHashMap<V> extends LinkedHashMap<String, V> {
      * @param newMap Map to use the values
      */
     public CaseInsensitiveLinkedHashMap(Map<String, V> newMap) {
-        super(newMap);
+        this();
+        putAll(newMap);
+    }
+
+    @Override
+    public V put(String key, V value) {
+        return super.put(normalizeKey(key), value);
     }
 
     @Override
     public V get(Object key) {
-        return super.get(key.toString().toLowerCase());
+        return super.get(normalizeKey(key));
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        return super.containsKey(normalizeKey(key));
+    }
+
+    @Override
+    public V remove(Object key) {
+        return super.remove(normalizeKey(key));
+    }
+
+    @Override
+    public void putAll(Map<? extends String, ? extends V> map) {
+        for (Entry<? extends String, ? extends V> entry : map.entrySet()) {
+            put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    private String normalizeKey(Object key) {
+        return key == null ? null : key.toString().toLowerCase();
     }
 
 }
